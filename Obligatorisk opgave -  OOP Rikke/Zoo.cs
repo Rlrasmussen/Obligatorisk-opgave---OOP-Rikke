@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace Obligatorisk_opgave____OOP_Rikke
 {
-    internal class ZooKeeper
+    internal class Zoo
     {
         #region field
-        string name;
+        static int arraysize = 3; //3 types of animals
+        private Animal[] cage = new Animal[arraysize];
         #endregion
 
         #region porporty
@@ -23,11 +23,12 @@ namespace Obligatorisk_opgave____OOP_Rikke
         #endregion
 
         #region method
-        public void FeedAnimal(Animal animal)
+        public void AddAnimal(Animal animal)
         {
-            
+
         }
 
         #endregion
+
     }
 }

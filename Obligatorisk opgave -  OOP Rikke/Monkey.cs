@@ -19,21 +19,25 @@ namespace Obligatorisk_opgave____OOP_Rikke
         #endregion
 
         #region constructor
-
+        public Monkey(string name, FoodTypes food, MoodLevels hunger) : base (name, food, hunger)
+        {
+            base.Name = name;
+            base.Diet = food;
+            base.Mood = hunger;
+        }
         #endregion
 
         #region method
-        public override void Eat(string food)
+        //public override void Eat(FoodTypes food)
+        public override void Eat(FoodTypes food)
         {
-            if (food != "banan")
+            base.Eat(food);
+            if (food == Diet)
             {
-                Console.WriteLine($"The monkey can't eat {food}");
-            }
-            else
-            {
-                Console.WriteLine($"The monkey is eating the {food}");
+                
             }
         }
+
         #endregion
 
     }
