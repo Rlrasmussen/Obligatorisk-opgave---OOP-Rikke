@@ -55,6 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Monkey.cs" />
+    <Compile Include="Parrot.cs" />
+    <Compile Include="Tiger.cs" />
     <Compile Include="ZooKeeper.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

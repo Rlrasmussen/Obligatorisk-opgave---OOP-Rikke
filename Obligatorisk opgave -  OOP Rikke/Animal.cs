@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace Obligatorisk_opgave____OOP_Rikke
 {
-    internal class Animal
+    abstract class Animal
     {
         #region field
         private string name;
         private string food;
         private int hunger;
+        private string mood;
 
 
         #endregion
@@ -35,10 +36,8 @@ namespace Obligatorisk_opgave____OOP_Rikke
 
         #region method
 
-        public void Eat()
-        {
+        public abstract void Eat(string food); //All animals need to eat so the zookeepers can feed them
 
-        }
         #endregion
     }
 }
