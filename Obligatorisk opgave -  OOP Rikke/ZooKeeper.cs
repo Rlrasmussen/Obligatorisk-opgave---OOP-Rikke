@@ -23,9 +23,22 @@ namespace Obligatorisk_opgave____OOP_Rikke
         #endregion
 
         #region method
-        public void FeedAnimal(Animal animal)
+        /// <summary>
+        /// Feed all the animals the same kind of food
+        /// </summary>
+        /// <param name="animal"></param>
+        /// <param name="food"></param>
+        public void FeedAnimal(Animal animal, FoodTypes food)
         {
-            
+            animal.Eat(food);
+        }
+
+        /// <summary>
+        /// Food only one kind of animal
+        /// </summary>
+        public void FeedAllAnimal()
+        {
+
         }
 
         #endregion
