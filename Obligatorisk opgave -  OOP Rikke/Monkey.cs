@@ -35,8 +35,18 @@ namespace Obligatorisk_opgave____OOP_Rikke
             base.Eat(food);
             if (food == Diet)
             {
-                
+                MainWindow.SetLabelOutput($"{Name} is eating {food} and it's mood is {Mood}");
             }
+            if (food != Diet)
+            {
+                MainWindow.SetLabelOutput($"{Name} don't like {food} and it's mood is now {Mood}");
+            }
+
+        }
+
+        public override void PetAnimal()
+        {
+            MainWindow.SetLabelOutput($"{Name} says: Uh uh ah ah");
         }
 
         #endregion

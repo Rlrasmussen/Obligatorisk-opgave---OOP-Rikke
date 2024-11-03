@@ -15,14 +15,25 @@ using System.Windows.Shapes;
 
 namespace Obligatorisk_opgave____OOP_Rikke
 {
+    
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+
+
+        private static string labelOutput;
         public MainWindow()
         {
             InitializeComponent();
         }
+
+
+        public static void SetLabelOutput(string outputMessage)
+        {
+            labelOutput = outputMessage;
+        }
+
     }
 }

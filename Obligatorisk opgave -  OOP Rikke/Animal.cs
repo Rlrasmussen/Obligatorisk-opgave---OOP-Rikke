@@ -11,20 +11,21 @@ namespace Obligatorisk_opgave____OOP_Rikke
     {
         #region field
         private string name;
-        private FoodTypes diet;
+        private FoodTypes diet; // enum
         private MoodLevels mood; //enum
 
         
         #endregion
 
-        #region porporty
+        #region property
         public string Name { get => name; set => name = value; }
         public FoodTypes Diet { get => diet; set => diet = value; }
         public MoodLevels Mood { get => mood; set => mood = value; }
 
+
         #endregion
 
-        #region contructor
+        #region constructor
         public Animal(string name, FoodTypes diet, MoodLevels mood)
         {
             this.name = name;
@@ -46,6 +47,10 @@ namespace Obligatorisk_opgave____OOP_Rikke
                     mood++;
                 }
             }
+            else if ((int)mood > 5)
+            {
+                MainWindow.SetLabelOutput($"{name} is {mood} and don't need anymore food");
+            }
             else
             {
                 if ((int)mood > 0)
@@ -55,6 +60,10 @@ namespace Obligatorisk_opgave____OOP_Rikke
             }
         }
 
+        /// <summary>
+        /// All the animals is getting petted
+        /// </summary>
+        public abstract void PetAnimal();
 
         #endregion
     }
