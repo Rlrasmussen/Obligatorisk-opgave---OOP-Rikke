@@ -36,35 +36,36 @@ namespace Obligatorisk_opgave____OOP_Rikke
         #region method
         public void AddAnimal(Animal animal)
         {
+            if (Animals.Count == 0)
+            {
+                Animals.Add(animal);
+                this.mainWindow.SetTextBlockOutput($"The {animal.Name} is added to the cage");
+                return;
+            }
+
             foreach (var cagedAnimal in Animals)
             {
-                if (Animals.Count == 0)
-                {
-                    Animals.Add(animal);
-                    this.mainWindow.SetLabelOutput($"The {animal} is added to the cage");
-                    break;
-                }
                 if(cagedAnimal is Tiger && animal is Tiger)
                 {
-                    Animals.Add(animal);
-                    this.mainWindow.SetLabelOutput($"The {animal} is added to the cage");
-                    break;
+                    animals.Add(animal);
+                    this.mainWindow.SetTextBlockOutput($"The {animal.Name} is added to the cage");
+                    return;
                 }
                 if (cagedAnimal is Tiger && animal is Parrot || cagedAnimal is Tiger && animal is Monkey)
                 {
-                    this.mainWindow.SetLabelOutput($"There is a tiger in the cage and the {animal} is now dead. The tiger is now put down and the entire cage is now empty.");
-                    Animals.Clear();
-                    break;
+                    this.mainWindow.SetTextBlockOutput($"There is a tiger in the cage and the {animal.Name} is now dead. The tiger is now put down and the entire cage is now empty.");
+                    animals.Clear();
+                    return;
                 }
                 if (cagedAnimal is Parrot && animal is Tiger || cagedAnimal is Monkey && animal is Tiger)
                 {
-                    this.mainWindow.SetLabelOutput("The tiger ate all the animals in the cage. The tiger is now put down and the entire cage is now empty.");
-                    Animals.Clear();
-                    break;
-                }
-                Animals.Add(animal);
-                this.mainWindow.SetLabelOutput($"The {animal} is added to the cage");
+                    this.mainWindow.SetTextBlockOutput("The tiger ate all the animals in the cage. The tiger is now put down and the entire cage is now empty.");
+                    animals.Clear();
+                    return;
+                }  
             }
+            animals.Add(animal);
+            this.mainWindow.SetTextBlockOutput($"The {animal.Name} is added to the cage");
         }
 
 

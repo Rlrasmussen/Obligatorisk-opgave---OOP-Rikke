@@ -42,13 +42,18 @@ namespace Obligatorisk_opgave____OOP_Rikke
         #region method
         internal void AddZookeeper(Zookeeper zookeeper)
         {
-            this.mainWindow.SetLabelOutput("Added zookeeper");
+            this.mainWindow.SetTextBlockOutput("Added zookeeper");
             zookeepers.Add(zookeeper);
         }
 
         internal void AddAnimal(Animal animal, int cage)
         {
             cages[cage].AddAnimal(animal);
+        }
+
+        internal List<Animal> GetAnimals(int cage)
+        {
+            return cages[cage].Animals;
         }
 
         #endregion

@@ -18,8 +18,10 @@ namespace Obligatorisk_opgave____OOP_Rikke
         #endregion
 
         #region constructor
-        public Tiger(MainWindow mainWindow) : base(FoodTypes.Meat, mainWindow)
-        { }
+        public Tiger(MainWindow mainWindow) : base(FoodTypes.Meat, mainWindow, nameof(Tiger))
+        {
+            base.Icon = "🐅";
+        }
         #endregion
 
         #region method
@@ -29,18 +31,18 @@ namespace Obligatorisk_opgave____OOP_Rikke
             base.Eat(food);
             if (food == Diet)
             {
-                this.mainWindow.SetLabelOutput($"The tiger is eating {food} and it's mood is {Mood}");
+                this.mainWindow.SetTextBlockOutput($"The tiger is eating {food} and it's mood is {Mood}");
             }
             if (food != Diet)
             {
-                this.mainWindow.SetLabelOutput($"The tiger don't like {food} and it's mood is now {Mood}");
+                this.mainWindow.SetTextBlockOutput($"The tiger don't like {food} and it's mood is now {Mood}");
             }
 
         }
 
         public override void PetAnimal()
         {
-            this.mainWindow.SetLabelOutput($"The tiger says pur pur");
+            this.mainWindow.SetTextBlockOutput($"The tiger says pur pur");
         }
 
         #endregion

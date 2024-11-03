@@ -13,7 +13,11 @@
             
         </Grid.RowDefinitions>
   <StackPanel>
-                <TextBlock x:Name="LabelOutput" Text="{Binding PrimaryLabel}" VerticalAlignment="Top"/>
+        <ScrollViewer x:Name="OutputScrollViewer" Height="120">
+          <TextBlock x:Name="LabelOutput" TextWrapping="Wrap" Text="{Binding PrimaryLabel}" VerticalAlignment="Top"/>
+
+         </ScrollViewer>          
+      
         <Button x:Name="FeedAllButton" Content="Feed all the animals" Click="FeedAllButton_Click"/>
         <Button x:Name="AddZookeeperButton" Content="Add zookeeper" Click="AddZookeeperButton_Click"/>
         <Button x:Name="MonkeyButton" Content="Add monkey" Click="MonkeyButton_Click"/>
@@ -30,17 +34,17 @@
         </Grid.RowDefinitions>
         <StackPanel >
             <Button x:Name="SelectCage1" Content="Cage 1" Click="SelectCage1_Click" />
-                <Label x:Name="Cage1Animals" />
+                <TextBlock x:Name="Cage1Animals" Text="{Binding Cage1TextBlock}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1">
             <Button x:Name="SelectCage2" Content="Cage 2" Click="SelectCage2_Click"  />
-            <Label x:Name="Cage2Animals"/>
+                <TextBlock x:Name="Cage2Animals" Text="{Binding Cage2TextBlock}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2">
             <Button x:Name="SelectCage3" Content="Cage 3" Click="SelectCage3_Click" />
-            <Label x:Name="Cage3Animals"/>
+                <TextBlock x:Name="Cage3Animals" Text="{Binding Cage3TextBlock}"/>
         </StackPanel>
         </Grid>
     </StackPanel>

@@ -11,7 +11,6 @@ namespace Obligatorisk_opgave____OOP_Rikke
     internal class Monkey : Animal
     {
         #region field
-
         #endregion
 
         #region property
@@ -20,10 +19,11 @@ namespace Obligatorisk_opgave____OOP_Rikke
         #endregion
 
         #region constructor
-        public Monkey(MainWindow mainWindow) : base (FoodTypes.Banana, mainWindow)
+        public Monkey(MainWindow mainWindow) : base (FoodTypes.Banana, mainWindow, nameof(Monkey))
         {
-
+            base.Icon = "🐒";
         }
+
         #endregion
 
         #region method
@@ -33,18 +33,18 @@ namespace Obligatorisk_opgave____OOP_Rikke
             base.Eat(food);
             if (food == Diet)
             {
-                this.mainWindow.SetLabelOutput($"The monkey ís eating {food} and it's mood is {Mood}");
+                this.mainWindow.SetTextBlockOutput($"The monkey ís eating {food} and it's mood is {Mood}");
             }
             if (food != Diet)
             {
-                this.mainWindow.SetLabelOutput($"The monkey don't like {food} and it's mood is now {Mood}");
+                this.mainWindow.SetTextBlockOutput($"The monkey don't like {food} and it's mood is now {Mood}");
             }
 
         }
-
+        
         public override void PetAnimal()
         {
-            this.mainWindow.SetLabelOutput($"The monkey says uh uh ah ah");
+            this.mainWindow.SetTextBlockOutput($"The monkey says uh uh ah ah");
         }
 
         #endregion
