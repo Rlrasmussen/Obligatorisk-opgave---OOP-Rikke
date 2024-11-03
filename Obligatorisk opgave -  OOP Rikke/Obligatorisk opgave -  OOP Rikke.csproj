@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Cage.cs" />
     <Compile Include="FoodTypes.cs" />
     <Compile Include="MoodLevels.cs" />
     <Compile Include="Monkey.cs" />
