@@ -57,6 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="Cage.cs" />
     <Compile Include="FoodTypes.cs" />
+    <Compile Include="IEat.cs" />
     <Compile Include="MoodLevels.cs" />
     <Compile Include="Monkey.cs" />
     <Compile Include="Parrot.cs" />

@@ -34,11 +34,17 @@ namespace Obligatorisk_opgave____OOP_Rikke
         }
 
         /// <summary>
-        /// Food only one kind of animal
+        /// Feed all the animals their diet
         /// </summary>
-        public void FeedAllAnimal()
+        public void FeedAllAnimals(Cage[] cages)
         {
-
+            foreach (Cage cage in cages)
+            {
+                foreach (Animal animal in cage.Animals)
+                {
+                    animal.Eat(animal.Diet);
+                }
+            }
         }
 
         #endregion

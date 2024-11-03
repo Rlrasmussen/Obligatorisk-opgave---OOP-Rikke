@@ -9,11 +9,14 @@ namespace Obligatorisk_opgave____OOP_Rikke
     internal class Zoo
     {
         #region field
-        static int arraysize = 3; //3 types of animals
-        private Animal[] cage = new Animal[arraysize];
+        private Cage[] cages = new Cage[3];
+        private List<ZooKeeper> zookeepers = new List<ZooKeeper>();
+
+
         #endregion
 
-        #region porporty
+        #region properties
+        internal List<ZooKeeper> Zookeepers { get => zookeepers;  }
 
 
         #endregion
@@ -23,10 +26,7 @@ namespace Obligatorisk_opgave____OOP_Rikke
         #endregion
 
         #region method
-        public void AddAnimal(Animal animal)
-        {
-
-        }
+        
 
         #endregion
 

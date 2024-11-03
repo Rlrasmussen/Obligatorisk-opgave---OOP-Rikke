@@ -12,9 +12,11 @@ namespace Obligatorisk_opgave____OOP_Rikke
         #region field
         private List<Animal> animals = new List<Animal>();
 
+
         #endregion
 
         #region property
+        internal List<Animal> Animals { get => animals; }
 
 
         #endregion
@@ -23,32 +25,44 @@ namespace Obligatorisk_opgave____OOP_Rikke
 
         #endregion
 
+        /// <summary>
+        /// Adding an animal to the cage where a Tiger only can be in a tiger cage og it will eat the other animals
+        /// </summary>
+        /// <param name="animal">The animal is going in the cage</param>
         #region method
         public void AddAnimal(Animal animal)
         {
-            foreach (var cagedAnimal in animals)
+            foreach (var cagedAnimal in Animals)
             {
-                if (animals.Count == 0)
+                if (Animals.Count == 0)
                 {
-                    animals.Add(animal);
+                    Animals.Add(animal);
                     MainWindow.SetLabelOutput($"The {animal} is added to the cage");
                     break;
                 }
                 if(cagedAnimal is Tiger && animal is Tiger)
                 {
-                    animals.Add(animal);
+                    Animals.Add(animal);
                     MainWindow.SetLabelOutput($"The {animal} is added to the cage");
                     break;
                 }
                 if (cagedAnimal is Tiger && animal is Parrot || cagedAnimal is Tiger && animal is Monkey)
                 {
-                    MainWindow.SetLabelOutput($"The {animal} can not be added to the tiger cage");
+                    MainWindow.SetLabelOutput($"There is a tiger in the cage and the {animal} is now dead. The tiger is now put down and the entire cage is now empty.");
+                    Animals.Clear();
                     break;
                 }
-                animals.Add(animal);
+                if (cagedAnimal is Parrot && animal is Tiger || cagedAnimal is Monkey && animal is Tiger)
+                {
+                    MainWindow.SetLabelOutput("The tiger ate all the animals in the cage. The tiger is now put down and the entire cage is now empty.");
+                    Animals.Clear();
+                    break;
+                }
+                Animals.Add(animal);
                 MainWindow.SetLabelOutput($"The {animal} is added to the cage");
             }
         }
+
 
         #endregion
     }

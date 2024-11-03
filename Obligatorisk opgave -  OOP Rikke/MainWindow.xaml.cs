@@ -21,7 +21,7 @@ namespace Obligatorisk_opgave____OOP_Rikke
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        private static Zoo zoo = new Zoo();
 
         private static string labelOutput;
         public MainWindow()

@@ -7,7 +7,7 @@ using System.Windows.Documents;
 
 namespace Obligatorisk_opgave____OOP_Rikke
 {
-    abstract class Animal
+    abstract class Animal : IEat
     {
         #region field
         private FoodTypes diet; // enum
