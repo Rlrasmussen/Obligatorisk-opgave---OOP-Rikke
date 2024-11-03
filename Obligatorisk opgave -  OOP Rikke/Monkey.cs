@@ -20,9 +20,8 @@ namespace Obligatorisk_opgave____OOP_Rikke
         #endregion
 
         #region constructor
-        public Monkey(string name, FoodTypes food, MoodLevels hunger) : base (name, food, hunger)
+        public Monkey(FoodTypes food, MoodLevels hunger) : base (food, hunger)
         {
-            base.Name = name;
             base.Diet = food;
             base.Mood = hunger;
         }
@@ -35,18 +34,18 @@ namespace Obligatorisk_opgave____OOP_Rikke
             base.Eat(food);
             if (food == Diet)
             {
-                MainWindow.SetLabelOutput($"{Name} is eating {food} and it's mood is {Mood}");
+                MainWindow.SetLabelOutput($"The monkey ís eating {food} and it's mood is {Mood}");
             }
             if (food != Diet)
             {
-                MainWindow.SetLabelOutput($"{Name} don't like {food} and it's mood is now {Mood}");
+                MainWindow.SetLabelOutput($"The monkey don't like {food} and it's mood is now {Mood}");
             }
 
         }
 
         public override void PetAnimal()
         {
-            MainWindow.SetLabelOutput($"{Name} says: Uh uh ah ah");
+            MainWindow.SetLabelOutput($"The monkey says uh uh ah ah");
         }
 
         #endregion
