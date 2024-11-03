@@ -12,16 +12,14 @@ namespace Obligatorisk_opgave____OOP_Rikke
 
         #endregion
 
-        #region porporty
+        #region property
 
 
         #endregion
 
         #region constructor
-        public Parrot(FoodTypes food, MoodLevels hunger) : base(food, hunger)
+        public Parrot(MainWindow mainWindow) : base(FoodTypes.Sugar, mainWindow)
         {
-            base.Diet = food;
-            base.Mood = hunger;
         }
         #endregion
 
@@ -32,21 +30,21 @@ namespace Obligatorisk_opgave____OOP_Rikke
             base.Eat(food);
             if (food == Diet)
             {
-                MainWindow.SetLabelOutput($"The parrot is eating {food} and it's mood is {Mood}");
+                this.mainWindow.SetLabelOutput($"The parrot is eating {food} and it's mood is {Mood}");
             }
             if (food != Diet)
             {
-                MainWindow.SetLabelOutput($"The parrot don't like {food} and it's mood is now {Mood}");
+                this.mainWindow.SetLabelOutput($"The parrot don't like {food} and it's mood is now {Mood}");
             }
             if (MoodLevels.Happy == Mood)
             {
-                MainWindow.SetLabelOutput($"The parrot is not hungry anymore");
+                this.mainWindow.SetLabelOutput($"The parrot is not hungry anymore");
             }
         }
 
         public override void PetAnimal()
         {
-            MainWindow.SetLabelOutput($"The parrot sqwuaks");
+            this.mainWindow.SetLabelOutput($"The parrot sqwuaks");
         }
 
         #endregion

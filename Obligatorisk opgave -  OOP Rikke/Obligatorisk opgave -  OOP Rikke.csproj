@@ -63,7 +63,7 @@
     <Compile Include="Parrot.cs" />
     <Compile Include="Tiger.cs" />
     <Compile Include="Zoo.cs" />
-    <Compile Include="ZooKeeper.cs" />
+    <Compile Include="Zookeeper.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

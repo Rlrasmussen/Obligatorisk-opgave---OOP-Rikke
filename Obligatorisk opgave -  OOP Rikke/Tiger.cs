@@ -18,11 +18,8 @@ namespace Obligatorisk_opgave____OOP_Rikke
         #endregion
 
         #region constructor
-        public Tiger(FoodTypes food, MoodLevels hunger) : base(food, hunger)
-        {
-            base.Diet = food;
-            base.Mood = hunger;
-        }
+        public Tiger(MainWindow mainWindow) : base(FoodTypes.Meat, mainWindow)
+        { }
         #endregion
 
         #region method
@@ -32,18 +29,18 @@ namespace Obligatorisk_opgave____OOP_Rikke
             base.Eat(food);
             if (food == Diet)
             {
-                MainWindow.SetLabelOutput($"The tiger is eating {food} and it's mood is {Mood}");
+                this.mainWindow.SetLabelOutput($"The tiger is eating {food} and it's mood is {Mood}");
             }
             if (food != Diet)
             {
-                MainWindow.SetLabelOutput($"The tiger don't like {food} and it's mood is now {Mood}");
+                this.mainWindow.SetLabelOutput($"The tiger don't like {food} and it's mood is now {Mood}");
             }
 
         }
 
         public override void PetAnimal()
         {
-            MainWindow.SetLabelOutput($"The tiger says pur pur");
+            this.mainWindow.SetLabelOutput($"The tiger says pur pur");
         }
 
         #endregion

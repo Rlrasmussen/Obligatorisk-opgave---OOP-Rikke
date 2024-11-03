@@ -18,10 +18,14 @@ namespace Obligatorisk_opgave____OOP_Rikke
         #region property
         internal List<Animal> Animals { get => animals; }
 
-
+        private MainWindow mainWindow;
         #endregion
 
         #region constructor
+        public Cage(MainWindow mainWindow)
+        {
+            this.mainWindow = mainWindow;
+        }
 
         #endregion
 
@@ -37,29 +41,29 @@ namespace Obligatorisk_opgave____OOP_Rikke
                 if (Animals.Count == 0)
                 {
                     Animals.Add(animal);
-                    MainWindow.SetLabelOutput($"The {animal} is added to the cage");
+                    this.mainWindow.SetLabelOutput($"The {animal} is added to the cage");
                     break;
                 }
                 if(cagedAnimal is Tiger && animal is Tiger)
                 {
                     Animals.Add(animal);
-                    MainWindow.SetLabelOutput($"The {animal} is added to the cage");
+                    this.mainWindow.SetLabelOutput($"The {animal} is added to the cage");
                     break;
                 }
                 if (cagedAnimal is Tiger && animal is Parrot || cagedAnimal is Tiger && animal is Monkey)
                 {
-                    MainWindow.SetLabelOutput($"There is a tiger in the cage and the {animal} is now dead. The tiger is now put down and the entire cage is now empty.");
+                    this.mainWindow.SetLabelOutput($"There is a tiger in the cage and the {animal} is now dead. The tiger is now put down and the entire cage is now empty.");
                     Animals.Clear();
                     break;
                 }
                 if (cagedAnimal is Parrot && animal is Tiger || cagedAnimal is Monkey && animal is Tiger)
                 {
-                    MainWindow.SetLabelOutput("The tiger ate all the animals in the cage. The tiger is now put down and the entire cage is now empty.");
+                    this.mainWindow.SetLabelOutput("The tiger ate all the animals in the cage. The tiger is now put down and the entire cage is now empty.");
                     Animals.Clear();
                     break;
                 }
                 Animals.Add(animal);
-                MainWindow.SetLabelOutput($"The {animal} is added to the cage");
+                this.mainWindow.SetLabelOutput($"The {animal} is added to the cage");
             }
         }
 

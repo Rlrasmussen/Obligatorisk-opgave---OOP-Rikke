@@ -12,7 +12,7 @@ namespace Obligatorisk_opgave____OOP_Rikke
         #region field
         private FoodTypes diet; // enum
         private MoodLevels mood; //enum
-
+        protected MainWindow mainWindow;
         
         #endregion
 
@@ -24,10 +24,10 @@ namespace Obligatorisk_opgave____OOP_Rikke
         #endregion
 
         #region constructor
-        public Animal(FoodTypes diet, MoodLevels mood)
+        public Animal(FoodTypes diet, MainWindow mainWindow)
         {
             this.diet = diet;
-            this.mood = mood;
+            this.mainWindow = mainWindow;
         }
         #endregion
 

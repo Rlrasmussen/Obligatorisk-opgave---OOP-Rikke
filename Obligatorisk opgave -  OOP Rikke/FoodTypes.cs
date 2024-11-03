@@ -8,8 +8,8 @@ namespace Obligatorisk_opgave____OOP_Rikke
 {
     enum FoodTypes
     {
-        Banan, //Monkey
+        Banana, //Monkey
         Meat, //Tiger
-        Suger //Parrot
+        Sugar //Parrot
     }
 }

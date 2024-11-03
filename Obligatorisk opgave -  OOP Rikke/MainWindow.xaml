@@ -6,7 +6,42 @@
         xmlns:local="clr-namespace:Obligatorisk_opgave____OOP_Rikke"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Label x:Name="LabelOutput" Content="{Binding labelOutput}" HorizontalAlignment="Left" Margin="574,299,0,0" VerticalAlignment="Top"/>
+    <StackPanel Orientation="Horizontal">
+    <Grid Width="200" HorizontalAlignment="Left">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            
+        </Grid.RowDefinitions>
+  <StackPanel>
+                <TextBlock x:Name="LabelOutput" Text="{Binding PrimaryLabel}" VerticalAlignment="Top"/>
+        <Button x:Name="FeedAllButton" Content="Feed all the animals" Click="FeedAllButton_Click"/>
+        <Button x:Name="AddZookeeperButton" Content="Add zookeeper" Click="AddZookeeperButton_Click"/>
+        <Button x:Name="MonkeyButton" Content="Add monkey" Click="MonkeyButton_Click"/>
+        <Button x:Name="ParrotButton" Content="Add parrot" Click="ParrotButton_Click"/>
+        <Button x:Name="TigerButton" Content="Add tiger" Click="TigerButton_Click"/>
+
+</StackPanel>
     </Grid>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <StackPanel >
+            <Button x:Name="SelectCage1" Content="Cage 1" Click="SelectCage1_Click" />
+                <Label x:Name="Cage1Animals" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="1">
+            <Button x:Name="SelectCage2" Content="Cage 2" Click="SelectCage2_Click"  />
+            <Label x:Name="Cage2Animals"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2">
+            <Button x:Name="SelectCage3" Content="Cage 3" Click="SelectCage3_Click" />
+            <Label x:Name="Cage3Animals"/>
+        </StackPanel>
+        </Grid>
+    </StackPanel>
 </Window>
