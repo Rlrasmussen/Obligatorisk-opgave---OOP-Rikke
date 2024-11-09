@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,11 +21,14 @@ namespace Obligatorisk_opgave____OOP_Rikke
 
         #region property
         public FoodTypes Diet { get => diet; set => diet = value; }
-        public MoodLevels Mood { get => mood; set => mood = value; }
+        public MoodLevels Mood { get => mood; set {  mood = value;
+                OnPropertyChanged(nameof(Mood)); } }
         public string Name { get => name; set => name = value; }
         public string Icon { get => icon; protected set => icon = value; }
 
+        public event PropertyChangedEventHandler PropertyChanged;
 
+        
         #endregion
 
         #region constructor
@@ -39,6 +43,11 @@ namespace Obligatorisk_opgave____OOP_Rikke
 
         #region method
 
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         public virtual void Eat(FoodTypes food)
         {
             if (food == Diet)
@@ -46,7 +55,11 @@ namespace Obligatorisk_opgave____OOP_Rikke
                 
                 if ((int)mood < Enum.GetValues(typeof(MoodLevels)).Cast<int>().Max())
                 {
-                    mood++;
+                    Mood++;
+                }
+                else
+                {
+                    this.mainWindow.SetTextBlockOutput($"The {this.Name} is full and don't want anymore food.");
                 }
             }
            
@@ -54,7 +67,7 @@ namespace Obligatorisk_opgave____OOP_Rikke
             {
                 if ((int)mood > 0)
                 {
-                    mood--;
+                    Mood--;
                 }
             }
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -22,12 +23,11 @@ namespace Obligatorisk_opgave____OOP_Rikke
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        private Zoo zoo;
+        private readonly Zoo zoo;
         private Zoo.CageIds selectedCage = Zoo.CageIds.Cage1;
         private string _primaryLabel;
-        private string cage1TextBlock;
-        private string cage2TextBlock;
-        private string cage3TextBlock;
+        private Animal selectedAnimal;
+        private Zookeeper selectedZookeeper;
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -41,37 +41,19 @@ namespace Obligatorisk_opgave____OOP_Rikke
             }
         }
 
-        public string Cage1TextBlock
-        {
-            get => cage1TextBlock; set
-            {
-                cage1TextBlock = value;
-                OnPropertyChanged(nameof(Cage1TextBlock));
-            }
-        }
-
-        public string Cage2TextBlock
-        {
-            get => cage1TextBlock; set
-            {
-                cage1TextBlock = value;
-                OnPropertyChanged(nameof(Cage2TextBlock));
-            }
-        }
-
-        public string Cage3TextBlock
-        {
-            get => cage1TextBlock; set
-            {
-                cage1TextBlock = value;
-                OnPropertyChanged(nameof(Cage3TextBlock));
-            }
-        }
 
         public MainWindow()
         {
             InitializeComponent();
             zoo = new Zoo(this);
+            zoo.AddZookeeper();
+            zoo.AddZookeeper();
+
+            Cage1Animals.ItemsSource = zoo.GetCagedAnimals(Zoo.CageIds.Cage1);
+            Cage2Animals.ItemsSource = zoo.GetCagedAnimals(Zoo.CageIds.Cage2);
+            Cage3Animals.ItemsSource = zoo.GetCagedAnimals(Zoo.CageIds.Cage3);
+            Zookeepers.ItemsSource = zoo.Zookeepers;
+
             DataContext = this; 
             PrimaryLabel= "Welcome to the zoo \n";
         }
@@ -86,38 +68,48 @@ namespace Obligatorisk_opgave____OOP_Rikke
             OutputScrollViewer.ScrollToBottom();
         }
 
-        private void FeedAllButton_Click(object sender, RoutedEventArgs e)
+        private void SugarButton_Click(object sender, RoutedEventArgs e)
         {
-            zoo.Zookeepers[0].FeedAllAnimals(zoo.Cages);
+            selectedZookeeper.FeedAnimal(selectedAnimal, FoodTypes.Sugar);
+            Cage1Animals.Items.Refresh();
+            Cage2Animals.Items.Refresh();
+            Cage3Animals.Items.Refresh();
+        }
+
+        private void BananaButton_Click(object sender, RoutedEventArgs e)
+        {
+            selectedZookeeper.FeedAnimal(selectedAnimal, FoodTypes.Banana);
+            Cage1Animals.Items.Refresh();
+            Cage2Animals.Items.Refresh();
+            Cage3Animals.Items.Refresh();
+        }
+
+        private void MeatButton_Click(object sender, RoutedEventArgs e)
+        {
+            selectedZookeeper.FeedAnimal(selectedAnimal, FoodTypes.Meat);
+            Cage1Animals.Items.Refresh();
+            Cage2Animals.Items.Refresh();
+            Cage3Animals.Items.Refresh();
         }
 
         private void AddZookeeperButton_Click(object sender, RoutedEventArgs e)
         {
-            zoo.AddZookeeper(new Zookeeper());
+            zoo.AddZookeeper();
         }
 
         private void TigerButton_Click(object sender, RoutedEventArgs e)
         {
-            int nicolas = (int)selectedCage;
-            this.zoo.AddAnimal(new Tiger(this), nicolas);
-            List<Animal> cageThem = zoo.GetAnimals(nicolas);
-            this.PrintCage(cageThem);
+            this.zoo.AddAnimal(new Tiger(this), selectedCage);
         }
 
         private void ParrotButton_Click(object sender, RoutedEventArgs e)
         {
-            int nicolas = (int)selectedCage;
-            this.zoo.AddAnimal(new Parrot(this), nicolas);
-            List<Animal> cageThem = zoo.GetAnimals(nicolas);
-            this.PrintCage(cageThem);
+            this.zoo.AddAnimal(new Parrot(this), selectedCage);
         }
 
-        private void MonkeyButton_Click(object sender, RoutedEventArgs e)
+        private void MonkeyButton_Click(object sender, RoutedEventArgs e) 
         {
-            int nicolas = (int)selectedCage;
-            this.zoo.AddAnimal(new Monkey(this), nicolas);
-            List<Animal> cageThem = zoo.GetAnimals(nicolas);
-            this.PrintCage(cageThem);
+            this.zoo.AddAnimal(new Monkey(this), selectedCage);
         }
 
         private void SelectCage1_Click(object sender, RoutedEventArgs e)
@@ -143,52 +135,56 @@ namespace Obligatorisk_opgave____OOP_Rikke
             SelectCage2.Background = Brushes.LightGray;
             SelectCage3.Background = Brushes.Turquoise;
         }
-        
 
-        private void PrintCage(List<Animal> animals)
+        private void Cage3Animals_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            int count = 0;
-            int maxCount = 5;
-            
-            switch (selectedCage)
+            Cage1Animals.SelectedIndex = -1;
+            Cage2Animals.SelectedIndex = -1;
+            this.selectedAnimal = (Animal)Cage3Animals.SelectedItem;
+            this.selectedCage = Zoo.CageIds.Cage3;
+        }
+
+        private void Cage2Animals_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Cage1Animals.SelectedIndex = -1;
+            Cage3Animals.SelectedIndex = -1;
+            this.selectedAnimal = (Animal)Cage2Animals.SelectedItem;
+            this.selectedCage = Zoo.CageIds.Cage2;
+        }
+
+        private void Cage1Animals_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Cage2Animals.SelectedIndex = -1;
+            Cage3Animals.SelectedIndex = -1;
+            this.selectedAnimal = (Animal)Cage1Animals.SelectedItem;
+            this.selectedCage = Zoo.CageIds.Cage1;
+        }
+
+        private void Zookeepers_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            this.selectedZookeeper = (Zookeeper)Zookeepers.SelectedItem;
+        }
+
+        private void RemoveZookeeperButton_Click(object sender, RoutedEventArgs e)
+        {
+            if ( selectedZookeeper == null)
             {
-                case Zoo.CageIds.Cage1:
-                    Cage1TextBlock = "";
-                    foreach (var animal in animals)
-                    {
-                        Cage1TextBlock += animal.Icon;
-                        count++;
-                        if (count % maxCount == 0)
-                        {
-                            cage1TextBlock += "\n";
-                        }
-                    }
-                    break;
-                case Zoo.CageIds.Cage2:
-                    Cage2TextBlock = "";
-                    foreach (var animal in animals)
-                    {
-                        Cage2TextBlock += animal.Icon;
-                        count++;
-                        if (count % maxCount == 0)
-                        {
-                            cage1TextBlock += "\n";
-                        }
-                    }
-                    break;
-                case Zoo.CageIds.Cage3:
-                    Cage3TextBlock = "";
-                    foreach (var animal in animals)
-                    {
-                        Cage3TextBlock += animal.Icon;
-                        count++;
-                        if (count % maxCount == 0)
-                        {
-                            cage1TextBlock += "\n";
-                        }
-                    }
-                    break;
+                this.SetTextBlockOutput("You need to choose a zookeeper.");
+                return;
             }
+            
+            zoo.RemoveZookeeper(selectedZookeeper);
+        }
+
+        private void RemoveAnimalButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (selectedAnimal == null)
+            {
+                this.SetTextBlockOutput("You need to choose an animal.");
+
+                return;
+            }
+            zoo.RemoveAnimal(selectedAnimal, selectedCage);
         }
     }
 }

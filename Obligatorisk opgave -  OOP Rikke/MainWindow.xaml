@@ -18,15 +18,14 @@
 
          </ScrollViewer>          
       
-        <Button x:Name="FeedAllButton" Content="Feed all the animals" Click="FeedAllButton_Click"/>
-        <Button x:Name="AddZookeeperButton" Content="Add zookeeper" Click="AddZookeeperButton_Click"/>
         <Button x:Name="MonkeyButton" Content="Add monkey" Click="MonkeyButton_Click"/>
         <Button x:Name="ParrotButton" Content="Add parrot" Click="ParrotButton_Click"/>
         <Button x:Name="TigerButton" Content="Add tiger" Click="TigerButton_Click"/>
+                <Button x:Name="RemoveAnimalButton" Content="Remove animal" Click="RemoveAnimalButton_Click" ></Button>
 
-</StackPanel>
+            </StackPanel>
     </Grid>
-    <Grid>
+    <Grid Width="200">
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />
@@ -34,18 +33,68 @@
         </Grid.RowDefinitions>
         <StackPanel >
             <Button x:Name="SelectCage1" Content="Cage 1" Click="SelectCage1_Click" />
-                <TextBlock x:Name="Cage1Animals" Text="{Binding Cage1TextBlock}"/>
+                <ScrollViewer Height="120">
+                    <ListBox x:Name="Cage1Animals" SelectionChanged="Cage1Animals_SelectionChanged" >
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="{Binding Icon}"></Label>
+                                    <Label Content="{Binding Mood}"></Label>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </ScrollViewer>
         </StackPanel>
 
         <StackPanel Grid.Row="1">
             <Button x:Name="SelectCage2" Content="Cage 2" Click="SelectCage2_Click"  />
-                <TextBlock x:Name="Cage2Animals" Text="{Binding Cage2TextBlock}"/>
+                <ScrollViewer Height="120">
+                <ListBox x:Name="Cage2Animals" SelectionChanged="Cage2Animals_SelectionChanged" >
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="{Binding Icon}"></Label>
+                                    <Label Content="{Binding Mood}"></Label>
+                                </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                </ScrollViewer>
         </StackPanel>
 
         <StackPanel Grid.Row="2">
-            <Button x:Name="SelectCage3" Content="Cage 3" Click="SelectCage3_Click" />
-                <TextBlock x:Name="Cage3Animals" Text="{Binding Cage3TextBlock}"/>
-        </StackPanel>
+            <Button x:Name="SelectCage3" Content="Cage 3" Click="SelectCage3_Click"/>
+                <ScrollViewer Height="120">
+                <ListBox x:Name="Cage3Animals" SelectionChanged="Cage3Animals_SelectionChanged" >
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="{Binding Icon}"></Label>
+                                    <Label Content="{Binding Mood}"></Label>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                </ScrollViewer>
+
+            </StackPanel>
         </Grid>
+    <StackPanel Width="200">
+        <Button x:Name="AddZookeeperButton" Content="Add zookeeper" Click="AddZookeeperButton_Click"/>
+            <Button x:Name="RemoveZookeeperButton" Content="Fire zookeeper" Click="RemoveZookeeperButton_Click" ></Button>
+            <ScrollViewer>
+                <ListBox x:Name="Zookeepers"  Height="300" SelectionChanged="Zookeepers_SelectionChanged">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Name}"></Label>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </ScrollViewer>    
+        <Button x:Name="BananaButton" Content="Banana 🍌" Click="BananaButton_Click"/>
+        <Button x:Name="SugarButton" Content="Sugar 🧊" Click="SugarButton_Click"/>
+        <Button x:Name="MeatButton" Content="Meat 🥩" Click="MeatButton_Click"/>
+    </StackPanel>
     </StackPanel>
 </Window>

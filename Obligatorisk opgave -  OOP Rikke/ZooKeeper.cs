@@ -10,10 +10,12 @@ namespace Obligatorisk_opgave____OOP_Rikke
     internal class Zookeeper
     {
         #region field
-        string name;
+        private string name;
+
         #endregion
 
         #region porporty
+        public string Name { get => name; set => name = value; }
 
 
         #endregion
@@ -31,20 +33,6 @@ namespace Obligatorisk_opgave____OOP_Rikke
         public void FeedAnimal(Animal animal, FoodTypes food)
         {
             animal.Eat(food);
-        }
-
-        /// <summary>
-        /// Feed all the animals their diet
-        /// </summary>
-        public void FeedAllAnimals(Cage[] cages)
-        {
-            foreach (Cage cage in cages)
-            {
-                foreach (Animal animal in cage.Animals)
-                {
-                    animal.Eat(animal.Diet);
-                }
-            }
         }
 
         #endregion

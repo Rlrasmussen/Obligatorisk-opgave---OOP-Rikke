@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,18 +10,20 @@ namespace Obligatorisk_opgave____OOP_Rikke
     internal class Zoo
     {
         #region field
-        private Cage[] cages = new Cage[3];
-        private List<Zookeeper> zookeepers = new List<Zookeeper>();
+        private readonly Cage[] cages = new Cage[3];
+        private readonly ObservableCollection<Zookeeper> zookeepers = new ObservableCollection<Zookeeper>();
+        private readonly string[] availableZookeeperNames = new string[5] { "Jebecky", "Jakob", "Nicolas", "Cage", "Them" };
+        private Random random = new Random();
 
         public enum CageIds
         {
-            Cage1, Cage2, Cage3
+            Cage1 = 0, Cage2 = 1, Cage3 = 2
         }
 
         #endregion
 
         #region properties
-        internal List<Zookeeper> Zookeepers { get => zookeepers;  }
+        internal ObservableCollection<Zookeeper> Zookeepers { get => zookeepers;  }
         internal Cage[] Cages { get => cages; }
 
         private MainWindow mainWindow;
@@ -40,20 +43,34 @@ namespace Obligatorisk_opgave____OOP_Rikke
         #endregion
 
         #region method
-        internal void AddZookeeper(Zookeeper zookeeper)
+        internal void AddZookeeper()
         {
-            this.mainWindow.SetTextBlockOutput("Added zookeeper");
+            int rdm = random.Next(0, 5);
+            Zookeeper zookeeper = new Zookeeper() { Name = availableZookeeperNames[rdm] };
             zookeepers.Add(zookeeper);
+            this.mainWindow.SetTextBlockOutput("Added zookeeper");
         }
 
-        internal void AddAnimal(Animal animal, int cage)
+        internal void RemoveZookeeper(Zookeeper zookeeper)
         {
-            cages[cage].AddAnimal(animal);
+            zookeepers.Remove(zookeeper);
+            this.mainWindow.SetTextBlockOutput($"Fired {zookeeper.Name}");
+
         }
 
-        internal List<Animal> GetAnimals(int cage)
+        internal void AddAnimal(Animal animal, CageIds cage)
         {
-            return cages[cage].Animals;
+            cages[(int)cage].AddAnimal(animal);
+        }
+
+        internal void RemoveAnimal(Animal animal, CageIds cage)
+        {
+            cages[(int)cage].RemoveAnimal(animal);
+        }
+
+        internal ObservableCollection<Animal> GetCagedAnimals(CageIds cage)
+        {
+            return cages[(int)cage].Animals;
         }
 
         #endregion
