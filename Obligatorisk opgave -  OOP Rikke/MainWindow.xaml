@@ -5,26 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Obligatorisk_opgave____OOP_Rikke"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="540" Width="900">
     <StackPanel Orientation="Horizontal">
-    <Grid Width="200" HorizontalAlignment="Left">
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            
-        </Grid.RowDefinitions>
-  <StackPanel>
-        <ScrollViewer x:Name="OutputScrollViewer" Height="120">
-          <TextBlock x:Name="LabelOutput" TextWrapping="Wrap" Text="{Binding PrimaryLabel}" VerticalAlignment="Top"/>
-
-         </ScrollViewer>          
-      
-        <Button x:Name="MonkeyButton" Content="Add monkey" Click="MonkeyButton_Click"/>
-        <Button x:Name="ParrotButton" Content="Add parrot" Click="ParrotButton_Click"/>
-        <Button x:Name="TigerButton" Content="Add tiger" Click="TigerButton_Click"/>
-                <Button x:Name="RemoveAnimalButton" Content="Remove animal" Click="RemoveAnimalButton_Click" ></Button>
-
-            </StackPanel>
-    </Grid>
+    
     <Grid Width="200">
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -33,7 +16,7 @@
         </Grid.RowDefinitions>
         <StackPanel >
             <Button x:Name="SelectCage1" Content="Cage 1" Click="SelectCage1_Click" />
-                <ScrollViewer Height="120">
+                <ScrollViewer Height="140">
                     <ListBox x:Name="Cage1Animals" SelectionChanged="Cage1Animals_SelectionChanged" >
                         <ListBox.ItemTemplate>
                             <DataTemplate>
@@ -49,7 +32,7 @@
 
         <StackPanel Grid.Row="1">
             <Button x:Name="SelectCage2" Content="Cage 2" Click="SelectCage2_Click"  />
-                <ScrollViewer Height="120">
+                <ScrollViewer Height="140">
                 <ListBox x:Name="Cage2Animals" SelectionChanged="Cage2Animals_SelectionChanged" >
                     <ListBox.ItemTemplate>
                         <DataTemplate>
@@ -65,7 +48,7 @@
 
         <StackPanel Grid.Row="2">
             <Button x:Name="SelectCage3" Content="Cage 3" Click="SelectCage3_Click"/>
-                <ScrollViewer Height="120">
+                <ScrollViewer Height="140">
                 <ListBox x:Name="Cage3Animals" SelectionChanged="Cage3Animals_SelectionChanged" >
                     <ListBox.ItemTemplate>
                         <DataTemplate>
@@ -80,11 +63,26 @@
 
             </StackPanel>
         </Grid>
-    <StackPanel Width="200">
+        <Grid Width="250" Margin="10,0" HorizontalAlignment="Left">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel>
+                <ScrollViewer x:Name="OutputScrollViewer" Height="280" >
+                    <TextBlock x:Name="LabelOutput" TextWrapping="Wrap" Text="{Binding PrimaryLabel}" VerticalAlignment="Top"/>
+                </ScrollViewer>
+                <Button x:Name="MonkeyButton" Content="Add monkey" Click="MonkeyButton_Click"/>
+                <Button x:Name="ParrotButton" Content="Add parrot" Click="ParrotButton_Click"/>
+                <Button x:Name="TigerButton" Content="Add tiger" Click="TigerButton_Click"/>
+                <Button x:Name="RemoveAnimalButton" Content="Remove animal" Click="RemoveAnimalButton_Click" ></Button>
+                <TextBlock x:Name="MoodLevelsTextBlock" TextWrapping="Wrap" ></TextBlock>
+            </StackPanel>
+        </Grid>
+        <StackPanel Width="200">
         <Button x:Name="AddZookeeperButton" Content="Add zookeeper" Click="AddZookeeperButton_Click"/>
             <Button x:Name="RemoveZookeeperButton" Content="Fire zookeeper" Click="RemoveZookeeperButton_Click" ></Button>
             <ScrollViewer>
-                <ListBox x:Name="Zookeepers"  Height="300" SelectionChanged="Zookeepers_SelectionChanged">
+                <ListBox x:Name="Zookeepers"  Height="280" SelectionChanged="Zookeepers_SelectionChanged">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Label Content="{Binding Name}"></Label>
@@ -95,6 +93,11 @@
         <Button x:Name="BananaButton" Content="Banana 🍌" Click="BananaButton_Click"/>
         <Button x:Name="SugarButton" Content="Sugar 🧊" Click="SugarButton_Click"/>
         <Button x:Name="MeatButton" Content="Meat 🥩" Click="MeatButton_Click"/>
+        <Button x:Name="PetAnimalButton" Content="Pet animal" Click="PetAnimalButton_Click" />
+        </StackPanel>
+        <StackPanel Width="200" Margin="10,0">
+            <TextBlock Height="432" x:Name="HowToTextBlock" TextWrapping="Wrap" Width="200"/>
+        </StackPanel>
     </StackPanel>
-    </StackPanel>
+    
 </Window>

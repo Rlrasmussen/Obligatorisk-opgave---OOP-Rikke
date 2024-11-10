@@ -29,7 +29,6 @@ namespace Obligatorisk_opgave____OOP_Rikke
         private Animal selectedAnimal;
         private Zookeeper selectedZookeeper;
 
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         public string PrimaryLabel
@@ -40,7 +39,6 @@ namespace Obligatorisk_opgave____OOP_Rikke
                 OnPropertyChanged(nameof(PrimaryLabel));
             }
         }
-
 
         public MainWindow()
         {
@@ -56,6 +54,16 @@ namespace Obligatorisk_opgave____OOP_Rikke
 
             DataContext = this; 
             PrimaryLabel= "Welcome to the zoo \n";
+            HowToTextBlock.Text = "How to use the zoo \n" +
+                "\r\nTo add a animal:\r\n1: Choose a cage \r\n2: Choose an animal \r\n" +
+                "\r\nTo remove an animal: \r\n1: Choose an animal \r\n2: Press “Remove animal” \r\n" +
+                "\r\nTo feed an animal: \r\n1: Choose a zookeeper \r\n2: Choose an animal \r\n3: Choose a diet \r\n" +
+                "\r\nTo pet an animal: \r\n1: Choose a zookeeper \r\n2: Choose an animal \r\n3: Press “Pet animal” \r\n" +
+                "\r\nTo add a zookeeper: \r\n1: Press “Add zookeeper” \r\n" +
+                "\r\nTo fire a zookeeper: \r\n1: Choose a zookeeper \r\n2: Press “Fire zookeeper” \r\n";
+            MoodLevelsTextBlock.Text = $"All the animals start at {MoodLevels.Furious} and gets happier when feed their diet. If they er feed something different their moodlevel lower.\n" +
+                $"\nThe different kinds of moods:\n" +
+                $"{MoodLevels.Furious}, {MoodLevels.Mad}, {MoodLevels.Hangry}, {MoodLevels.Fine}, {MoodLevels.Contempt} and {MoodLevels.Happy}.";
         }
 
         protected virtual void OnPropertyChanged(string propertyName)
@@ -70,6 +78,16 @@ namespace Obligatorisk_opgave____OOP_Rikke
 
         private void SugarButton_Click(object sender, RoutedEventArgs e)
         {
+            if (selectedAnimal == null)
+            {
+                this.SetTextBlockOutput("You need to choose an animal.");
+                return;
+            }
+            if ( selectedZookeeper == null)
+            {
+                this.SetTextBlockOutput("You need to choose a zookeeper.");
+                return;
+            }
             selectedZookeeper.FeedAnimal(selectedAnimal, FoodTypes.Sugar);
             Cage1Animals.Items.Refresh();
             Cage2Animals.Items.Refresh();
@@ -78,6 +96,16 @@ namespace Obligatorisk_opgave____OOP_Rikke
 
         private void BananaButton_Click(object sender, RoutedEventArgs e)
         {
+            if (selectedAnimal == null)
+            {
+                this.SetTextBlockOutput("You need to choose an animal.");
+                return;
+            }
+            if (selectedZookeeper == null)
+            {
+                this.SetTextBlockOutput("You need to choose a zookeeper.");
+                return;
+            }
             selectedZookeeper.FeedAnimal(selectedAnimal, FoodTypes.Banana);
             Cage1Animals.Items.Refresh();
             Cage2Animals.Items.Refresh();
@@ -86,6 +114,16 @@ namespace Obligatorisk_opgave____OOP_Rikke
 
         private void MeatButton_Click(object sender, RoutedEventArgs e)
         {
+            if (selectedAnimal == null)
+            {
+                this.SetTextBlockOutput("You need to choose an animal.");
+                return;
+            }
+            if (selectedZookeeper == null)
+            {
+                this.SetTextBlockOutput("You need to choose a zookeeper.");
+                return;
+            }
             selectedZookeeper.FeedAnimal(selectedAnimal, FoodTypes.Meat);
             Cage1Animals.Items.Refresh();
             Cage2Animals.Items.Refresh();
@@ -115,7 +153,7 @@ namespace Obligatorisk_opgave____OOP_Rikke
         private void SelectCage1_Click(object sender, RoutedEventArgs e)
         {
             selectedCage = Zoo.CageIds.Cage1;
-            SelectCage1.Background = Brushes.Turquoise;
+            SelectCage1.Background = Brushes.CornflowerBlue;
             SelectCage2.Background = Brushes.LightGray;
             SelectCage3.Background = Brushes.LightGray;
         }
@@ -124,7 +162,7 @@ namespace Obligatorisk_opgave____OOP_Rikke
         {
             selectedCage = Zoo.CageIds.Cage2;
             SelectCage1.Background = Brushes.LightGray;
-            SelectCage2.Background = Brushes.Turquoise;
+            SelectCage2.Background = Brushes.CornflowerBlue;
             SelectCage3.Background = Brushes.LightGray;
         }
 
@@ -133,7 +171,7 @@ namespace Obligatorisk_opgave____OOP_Rikke
             selectedCage = Zoo.CageIds.Cage3;
             SelectCage1.Background = Brushes.LightGray;
             SelectCage2.Background = Brushes.LightGray;
-            SelectCage3.Background = Brushes.Turquoise;
+            SelectCage3.Background = Brushes.CornflowerBlue;
         }
 
         private void Cage3Animals_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -184,7 +222,19 @@ namespace Obligatorisk_opgave____OOP_Rikke
 
                 return;
             }
+            this.SetTextBlockOutput($"{selectedAnimal.Name} is removed.");
             zoo.RemoveAnimal(selectedAnimal, selectedCage);
         }
+
+        private void PetAnimalButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(selectedAnimal == null || selectedZookeeper == null)
+            {
+                this.SetTextBlockOutput("You need to choose an animal and a zookeeper.");
+                return;
+            }
+            selectedZookeeper.PetAnimal(selectedAnimal);
+        }
+
     }
 }

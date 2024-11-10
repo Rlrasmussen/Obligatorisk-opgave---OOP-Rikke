@@ -21,14 +21,10 @@ namespace Obligatorisk_opgave____OOP_Rikke
 
         #region property
         public FoodTypes Diet { get => diet; set => diet = value; }
-        public MoodLevels Mood { get => mood; set {  mood = value;
-                OnPropertyChanged(nameof(Mood)); } }
+        public MoodLevels Mood { get => mood; set => mood = value; }
         public string Name { get => name; set => name = value; }
         public string Icon { get => icon; protected set => icon = value; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        
         #endregion
 
         #region constructor
@@ -43,23 +39,18 @@ namespace Obligatorisk_opgave____OOP_Rikke
 
         #region method
 
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
 
         public virtual void Eat(FoodTypes food)
         {
             if (food == Diet)
             {
-                
-                if ((int)mood < Enum.GetValues(typeof(MoodLevels)).Cast<int>().Max())
+                if ((int)mood == Enum.GetValues(typeof(MoodLevels)).Cast<int>().Max())
                 {
-                    Mood++;
+                    this.mainWindow.SetTextBlockOutput($"The {this.Name} is full and don't want anymore food.");
                 }
                 else
                 {
-                    this.mainWindow.SetTextBlockOutput($"The {this.Name} is full and don't want anymore food.");
+                    Mood++;
                 }
             }
            

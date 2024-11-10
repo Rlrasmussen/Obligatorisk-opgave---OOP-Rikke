@@ -35,6 +35,11 @@ namespace Obligatorisk_opgave____OOP_Rikke
             animal.Eat(food);
         }
 
+        public void PetAnimal(Animal animal)
+        {
+            animal.PetAnimal();
+        }
+
         #endregion
     }
 }
