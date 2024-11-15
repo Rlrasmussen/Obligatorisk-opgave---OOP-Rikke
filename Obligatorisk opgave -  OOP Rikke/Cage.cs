@@ -11,18 +11,24 @@ namespace Obligatorisk_opgave____OOP_Rikke
     {
 
         #region field
+        /// <summary>
+        /// It's a dynamic collection of animals
+        /// </summary>
         private ObservableCollection<Animal> animals = new ObservableCollection<Animal>();
 
-
+        private MainWindow mainWindow;
         #endregion
 
         #region property
         internal ObservableCollection<Animal> Animals { get => animals; }
 
-        private MainWindow mainWindow;
         #endregion
 
         #region constructor
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="mainWindow">A mainwindow</param>
         public Cage(MainWindow mainWindow)
         {
             this.mainWindow = mainWindow;
@@ -30,10 +36,7 @@ namespace Obligatorisk_opgave____OOP_Rikke
 
         #endregion
 
-        /// <summary>
-        /// Adding an animal to the cage where a Tiger only can be in a tiger cage og it will eat the other animals
-        /// </summary>
-        /// <param name="animal">The animal is going in the cage</param>
+        
         #region method
         public void AddAnimal(Animal animal)
         {

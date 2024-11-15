@@ -18,6 +18,11 @@ namespace Obligatorisk_opgave____OOP_Rikke
         #endregion
 
         #region constructor
+        /// <summary>
+        /// In the construction of the Parrot it's diet and name is already set. 
+        /// A parrot is eating sugar and it's name is Parrot.
+        /// </summary>
+        /// <param name="mainWindow">A mainwindow</param>
         public Parrot(MainWindow mainWindow) : base(FoodTypes.Sugar, mainWindow, nameof(Parrot))
         {
             base.Icon = "🦜";
@@ -25,7 +30,10 @@ namespace Obligatorisk_opgave____OOP_Rikke
         #endregion
 
         #region method
-        //public override void Eat(FoodTypes food)
+        /// <summary>
+        /// The parrot is eating the food. If the food is sugar it will eat it and Moodlevel will rise else it will not eat and Moodlevel drop
+        /// </summary>
+        /// <param name="food">A food</param>
         public override void Eat(FoodTypes food)
         {
             base.Eat(food);
@@ -43,6 +51,9 @@ namespace Obligatorisk_opgave____OOP_Rikke
             }
         }
 
+        /// <summary>
+        /// When the parrot gets petted of a zookeeper it will send a message
+        /// </summary>
         public override void PetAnimal()
         {
             this.mainWindow.SetTextBlockOutput($"The parrot sqwuaks");
