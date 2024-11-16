@@ -1,19 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Obligatorisk_opgave____OOP_Rikke
 {
@@ -23,14 +11,18 @@ namespace Obligatorisk_opgave____OOP_Rikke
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
+        #region field
         private readonly Zoo zoo;
         private Zoo.CageIds selectedCage = Zoo.CageIds.Cage1;
         private string _primaryLabel;
         private Animal selectedAnimal;
         private Zookeeper selectedZookeeper;
 
-        public event PropertyChangedEventHandler PropertyChanged;
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
+
+        #region property
         public string PrimaryLabel
         {
             get => _primaryLabel; set
@@ -40,6 +32,9 @@ namespace Obligatorisk_opgave____OOP_Rikke
             }
         }
 
+        #endregion
+
+        #region constructor
         public MainWindow()
         {
             InitializeComponent();
@@ -66,6 +61,9 @@ namespace Obligatorisk_opgave____OOP_Rikke
                 $"{MoodLevels.Furious}, {MoodLevels.Mad}, {MoodLevels.Hangry}, {MoodLevels.Fine}, {MoodLevels.Contempt} and {MoodLevels.Happy}.";
         }
 
+        #endregion
+
+        #region method
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -76,6 +74,12 @@ namespace Obligatorisk_opgave____OOP_Rikke
             OutputScrollViewer.ScrollToBottom();
         }
 
+        #region food
+        /// <summary>
+        /// Feed an animal sugar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SugarButton_Click(object sender, RoutedEventArgs e)
         {
             if (selectedAnimal == null)
@@ -94,6 +98,11 @@ namespace Obligatorisk_opgave____OOP_Rikke
             Cage3Animals.Items.Refresh();
         }
 
+        /// <summary>
+        /// Feed an animal banana
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BananaButton_Click(object sender, RoutedEventArgs e)
         {
             if (selectedAnimal == null)
@@ -112,6 +121,11 @@ namespace Obligatorisk_opgave____OOP_Rikke
             Cage3Animals.Items.Refresh();
         }
 
+        /// <summary>
+        /// Feeding an animal meat
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MeatButton_Click(object sender, RoutedEventArgs e)
         {
             if (selectedAnimal == null)
@@ -130,11 +144,14 @@ namespace Obligatorisk_opgave____OOP_Rikke
             Cage3Animals.Items.Refresh();
         }
 
+        #endregion
+
         private void AddZookeeperButton_Click(object sender, RoutedEventArgs e)
         {
             zoo.AddZookeeper();
         }
 
+        #region add animal
         private void TigerButton_Click(object sender, RoutedEventArgs e)
         {
             this.zoo.AddAnimal(new Tiger(this), selectedCage);
@@ -149,6 +166,9 @@ namespace Obligatorisk_opgave____OOP_Rikke
         {
             this.zoo.AddAnimal(new Monkey(this), selectedCage);
         }
+
+        #endregion
+
 
         private void SelectCage1_Click(object sender, RoutedEventArgs e)
         {
@@ -235,6 +255,6 @@ namespace Obligatorisk_opgave____OOP_Rikke
             }
             selectedZookeeper.PetAnimal(selectedAnimal);
         }
-
+        #endregion
     }
 }

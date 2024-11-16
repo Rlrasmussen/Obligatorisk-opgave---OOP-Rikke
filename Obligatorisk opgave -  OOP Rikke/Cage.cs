@@ -26,7 +26,7 @@ namespace Obligatorisk_opgave____OOP_Rikke
 
         #region constructor
         /// <summary>
-        /// 
+        /// Constructer for the animal cage
         /// </summary>
         /// <param name="mainWindow">A mainwindow</param>
         public Cage(MainWindow mainWindow)
@@ -38,8 +38,13 @@ namespace Obligatorisk_opgave____OOP_Rikke
 
         
         #region method
+        /// <summary>
+        /// Adding an animal to a cage where tigers can not be in the same cage as parrots and monkeys. Parrots and monkeys can be in the same cage
+        /// </summary>
+        /// <param name="animal">An animal</param>
         public void AddAnimal(Animal animal)
         {
+            //If the cage is empty
             if (Animals.Count == 0)
             {
                 Animals.Add(animal);
@@ -47,7 +52,8 @@ namespace Obligatorisk_opgave____OOP_Rikke
                 return;
             }
 
-            foreach (var cagedAnimal in Animals)
+            //If the cage isn't empty and tjecking if the animal and/or the aldready caged animal(s) is a tiger
+            foreach (Animal cagedAnimal in Animals)
             {
                 if(cagedAnimal is Tiger && animal is Tiger)
                 {
@@ -66,10 +72,15 @@ namespace Obligatorisk_opgave____OOP_Rikke
                     return;
                 }  
             }
+            //If none of the animals are a tiger
             animals.Add(animal);
             this.mainWindow.SetTextBlockOutput($"The {animal.Name} is added to the cage");
         }
 
+        /// <summary>
+        /// Remove an animal from the cage
+        /// </summary>
+        /// <param name="animal">An animal</param>
         internal void RemoveAnimal(Animal animal)
         {
             Animals.Remove(animal);

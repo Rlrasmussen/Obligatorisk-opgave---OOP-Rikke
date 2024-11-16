@@ -11,10 +11,26 @@ namespace Obligatorisk_opgave____OOP_Rikke
     abstract class Animal 
     {
         #region field
-        private FoodTypes diet; // enum
-        private MoodLevels mood; //enum
         protected MainWindow mainWindow;
+        
+        /// <summary>
+        /// The animals diet - enum
+        /// </summary>
+        private FoodTypes diet; // enum
+        
+        /// <summary>
+        /// The animals moodlevel - enum
+        /// </summary>
+        private MoodLevels mood; //enum
+        
+        /// <summary>
+        /// The animals name - the name is the species
+        /// </summary>
         private string name;
+        
+        /// <summary>
+        /// The animals icon/emoji
+        /// </summary>
         private string icon;
 
         #endregion
@@ -39,7 +55,10 @@ namespace Obligatorisk_opgave____OOP_Rikke
 
         #region method
 
-
+        /// <summary>
+        /// When an animal is eating food it will affect it's mood. If feed their diet the mood will rise, if it's not the diet the mood will fall and if the animal is "Happy" (highest) the player will get a message 
+        /// </summary>
+        /// <param name="food">A foodtype (diet)</param>
         public virtual void Eat(FoodTypes food)
         {
             if (food == Diet)
@@ -53,7 +72,6 @@ namespace Obligatorisk_opgave____OOP_Rikke
                     Mood++;
                 }
             }
-           
             else
             {
                 if ((int)mood > 0)
@@ -64,7 +82,7 @@ namespace Obligatorisk_opgave____OOP_Rikke
         }
 
         /// <summary>
-        /// All the animals is getting petted
+        /// A zookeeper can pet an animal
         /// </summary>
         public abstract void PetAnimal();
 
