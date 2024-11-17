@@ -20,7 +20,7 @@ namespace Obligatorisk_opgave____OOP_Rikke
         #endregion
 
         #region property
-        internal ObservableCollection<Animal> Animals { get => animals; }
+        internal ObservableCollection<Animal> Animals { get => animals; } //IT's internal so other classes can acces the collection
 
         #endregion
 

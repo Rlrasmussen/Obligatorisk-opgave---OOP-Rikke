@@ -17,7 +17,7 @@ namespace Obligatorisk_opgave____OOP_Rikke
 
         #endregion
 
-        #region porperty
+        #region property
         public string Name { get => name; set => name = value; }
 
         #endregion
