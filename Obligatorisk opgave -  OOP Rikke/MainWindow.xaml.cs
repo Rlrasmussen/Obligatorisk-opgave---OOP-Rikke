@@ -12,13 +12,34 @@ namespace Obligatorisk_opgave____OOP_Rikke
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         #region field
+        /// <summary>
+        /// The zoo. Made readonly for making a fixed variable after the zoo is constructed 
+        /// </summary>
         private readonly Zoo zoo;
-        private Zoo.CageIds selectedCage = Zoo.CageIds.Cage1;
+
+        /// <summary>
+        /// Message which is printing out in "OutputScrollViewer"
+        /// </summary>
         private string _primaryLabel;
+        
+        /// <summary>
+        /// Selected cage
+        /// </summary>
+        private Zoo.CageIds selectedCage = Zoo.CageIds.Cage1;
+        
+        /// <summary>
+        /// Selected animal
+        /// </summary>
         private Animal selectedAnimal;
+        
+        /// <summary>
+        /// Seleted zookeeper
+        /// </summary>
         private Zookeeper selectedZookeeper;
 
-
+        /// <summary>
+        /// Handles the changes for the property which PrimaryLabel
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
@@ -28,7 +49,7 @@ namespace Obligatorisk_opgave____OOP_Rikke
             get => _primaryLabel; set
             {
                 _primaryLabel = value;
-                OnPropertyChanged(nameof(PrimaryLabel));
+                OnPropertyChanged(nameof(PrimaryLabel)); //Call OnPropertyChanged when the property is changes
             }
         }
 
@@ -39,16 +60,24 @@ namespace Obligatorisk_opgave____OOP_Rikke
         {
             InitializeComponent();
             zoo = new Zoo(this);
-            zoo.AddZookeeper();
-            zoo.AddZookeeper();
+            zoo.AddZookeeper(); //First prehired zookeeper
+            zoo.AddZookeeper(); //Second prehired zookeeper
 
+            //The three cages 
             Cage1Animals.ItemsSource = zoo.GetCagedAnimals(Zoo.CageIds.Cage1);
             Cage2Animals.ItemsSource = zoo.GetCagedAnimals(Zoo.CageIds.Cage2);
             Cage3Animals.ItemsSource = zoo.GetCagedAnimals(Zoo.CageIds.Cage3);
+            
+            //The zookeepers
             Zookeepers.ItemsSource = zoo.Zookeepers;
 
-            DataContext = this; 
-            PrimaryLabel= "Welcome to the zoo \n";
+            //For elemtens which is part of binding
+            DataContext = this;
+
+            //Welcome message
+            PrimaryLabel = "Welcome to the zoo \n";
+
+            //How to manual for operating the zoo and defining the different moods
             HowToTextBlock.Text = "How to use the zoo \n" +
                 "\r\nTo add a animal:\r\n1: Choose a cage \r\n2: Choose an animal \r\n" +
                 "\r\nTo remove an animal: \r\n1: Choose an animal \r\n2: Press “Remove animal” \r\n" +
@@ -64,10 +93,19 @@ namespace Obligatorisk_opgave____OOP_Rikke
         #endregion
 
         #region method
+        /// <summary>
+        /// Make changes when there are changes to propertyName
+        /// </summary>
+        /// <param name="propertyName">A property which is going to be changed</param>
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        /// <summary>
+        /// Print out message at "OutputScrollViewer"
+        /// </summary>
+        /// <param name="outputMessage">Message</param>
         public void SetTextBlockOutput(string outputMessage)
         {
             PrimaryLabel += outputMessage + "\n";
@@ -78,8 +116,8 @@ namespace Obligatorisk_opgave____OOP_Rikke
         /// <summary>
         /// Feed an animal sugar
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Caster over to the buttom</param>
+        /// <param name="e">Registered changes in event</param>
         private void SugarButton_Click(object sender, RoutedEventArgs e)
         {
             if (selectedAnimal == null)
@@ -101,8 +139,8 @@ namespace Obligatorisk_opgave____OOP_Rikke
         /// <summary>
         /// Feed an animal banana
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Caster over to the buttom</param>
+        /// <param name="e">Registered changes in event</param>
         private void BananaButton_Click(object sender, RoutedEventArgs e)
         {
             if (selectedAnimal == null)
@@ -146,94 +184,42 @@ namespace Obligatorisk_opgave____OOP_Rikke
 
         #endregion
 
-        private void AddZookeeperButton_Click(object sender, RoutedEventArgs e)
-        {
-            zoo.AddZookeeper();
-        }
-
-        #region add animal
+        #region animal
+        /// <summary>
+        /// Ad a tiger
+        /// </summary>
+        /// <param name="sender">Caster over to the buttom</param>
+        /// <param name="e">Registered changes in event</param>
         private void TigerButton_Click(object sender, RoutedEventArgs e)
         {
             this.zoo.AddAnimal(new Tiger(this), selectedCage);
         }
 
+        /// <summary>
+        /// Ad a parrot
+        /// </summary>
+        /// <param name="sender">Caster over to the buttom</param>
+        /// <param name="e">Registered changes in event</param>
         private void ParrotButton_Click(object sender, RoutedEventArgs e)
         {
             this.zoo.AddAnimal(new Parrot(this), selectedCage);
         }
 
+        /// <summary>
+        /// Add a monkey
+        /// </summary>
+        /// <param name="sender">Caster over to the buttom</param>
+        /// <param name="e">Registered changes in event</param>
         private void MonkeyButton_Click(object sender, RoutedEventArgs e) 
         {
             this.zoo.AddAnimal(new Monkey(this), selectedCage);
         }
 
-        #endregion
-
-
-        private void SelectCage1_Click(object sender, RoutedEventArgs e)
-        {
-            selectedCage = Zoo.CageIds.Cage1;
-            SelectCage1.Background = Brushes.CornflowerBlue;
-            SelectCage2.Background = Brushes.LightGray;
-            SelectCage3.Background = Brushes.LightGray;
-        }
-
-        private void SelectCage2_Click(object sender, RoutedEventArgs e)
-        {
-            selectedCage = Zoo.CageIds.Cage2;
-            SelectCage1.Background = Brushes.LightGray;
-            SelectCage2.Background = Brushes.CornflowerBlue;
-            SelectCage3.Background = Brushes.LightGray;
-        }
-
-        private void SelectCage3_Click(object sender, RoutedEventArgs e)
-        {
-            selectedCage = Zoo.CageIds.Cage3;
-            SelectCage1.Background = Brushes.LightGray;
-            SelectCage2.Background = Brushes.LightGray;
-            SelectCage3.Background = Brushes.CornflowerBlue;
-        }
-
-        private void Cage3Animals_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Cage1Animals.SelectedIndex = -1;
-            Cage2Animals.SelectedIndex = -1;
-            this.selectedAnimal = (Animal)Cage3Animals.SelectedItem;
-            this.selectedCage = Zoo.CageIds.Cage3;
-        }
-
-        private void Cage2Animals_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Cage1Animals.SelectedIndex = -1;
-            Cage3Animals.SelectedIndex = -1;
-            this.selectedAnimal = (Animal)Cage2Animals.SelectedItem;
-            this.selectedCage = Zoo.CageIds.Cage2;
-        }
-
-        private void Cage1Animals_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Cage2Animals.SelectedIndex = -1;
-            Cage3Animals.SelectedIndex = -1;
-            this.selectedAnimal = (Animal)Cage1Animals.SelectedItem;
-            this.selectedCage = Zoo.CageIds.Cage1;
-        }
-
-        private void Zookeepers_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            this.selectedZookeeper = (Zookeeper)Zookeepers.SelectedItem;
-        }
-
-        private void RemoveZookeeperButton_Click(object sender, RoutedEventArgs e)
-        {
-            if ( selectedZookeeper == null)
-            {
-                this.SetTextBlockOutput("You need to choose a zookeeper.");
-                return;
-            }
-            
-            zoo.RemoveZookeeper(selectedZookeeper);
-        }
-
+        /// <summary>
+        /// Remove animal
+        /// </summary>
+        /// <param name="sender">Caster over to the buttom</param>
+        /// <param name="e">Registered changes in event</param>
         private void RemoveAnimalButton_Click(object sender, RoutedEventArgs e)
         {
             if (selectedAnimal == null)
@@ -246,6 +232,11 @@ namespace Obligatorisk_opgave____OOP_Rikke
             zoo.RemoveAnimal(selectedAnimal, selectedCage);
         }
 
+        /// <summary>
+        /// Pet animal
+        /// </summary>
+        /// <param name="sender">Caster over to the buttom</param>
+        /// <param name="e">Registered changes in event</param>
         private void PetAnimalButton_Click(object sender, RoutedEventArgs e)
         {
             if(selectedAnimal == null || selectedZookeeper == null)
@@ -255,6 +246,128 @@ namespace Obligatorisk_opgave____OOP_Rikke
             }
             selectedZookeeper.PetAnimal(selectedAnimal);
         }
+
+        #endregion
+
+        #region cage
+        /// <summary>
+        /// Select cage 1
+        /// </summary>
+        /// <param name="sender">Caster over to the buttom</param>
+        /// <param name="e">Registered changes in event</param>
+        private void SelectCage1_Click(object sender, RoutedEventArgs e)
+        {
+            selectedCage = Zoo.CageIds.Cage1;
+            SelectCage1.Background = Brushes.CornflowerBlue;
+            SelectCage2.Background = Brushes.LightGray;
+            SelectCage3.Background = Brushes.LightGray;
+        }
+
+        /// <summary>
+        /// Select cage 2
+        /// </summary>
+        /// <param name="sender">Caster over to the buttom</param>
+        /// <param name="e">Registered changes in event</param>
+        private void SelectCage2_Click(object sender, RoutedEventArgs e)
+        {
+            selectedCage = Zoo.CageIds.Cage2;
+            SelectCage1.Background = Brushes.LightGray;
+            SelectCage2.Background = Brushes.CornflowerBlue;
+            SelectCage3.Background = Brushes.LightGray;
+        }
+
+        /// <summary>
+        /// Select cage 3
+        /// </summary>
+        /// <param name="sender">Caster over to the buttom</param>
+        /// <param name="e">Registered changes in event</param>
+        private void SelectCage3_Click(object sender, RoutedEventArgs e)
+        {
+            selectedCage = Zoo.CageIds.Cage3;
+            SelectCage1.Background = Brushes.LightGray;
+            SelectCage2.Background = Brushes.LightGray;
+            SelectCage3.Background = Brushes.CornflowerBlue;
+        }
+
+        /// <summary>
+        /// Select cage 1 animal
+        /// </summary>
+        /// <param name="sender">Caster over to the buttom</param>
+        /// <param name="e">Registered changes in event</param>
+        private void Cage1Animals_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Cage2Animals.SelectedIndex = -1;
+            Cage3Animals.SelectedIndex = -1;
+            this.selectedAnimal = (Animal)Cage1Animals.SelectedItem;
+            this.selectedCage = Zoo.CageIds.Cage1;
+        }
+
+
+        /// <summary>
+        /// Select cage 2 animal
+        /// </summary>
+        /// <param name="sender">Caster over to the buttom</param>
+        /// <param name="e">Registered changes in event</param>
+        private void Cage2Animals_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Cage1Animals.SelectedIndex = -1;
+            Cage3Animals.SelectedIndex = -1;
+            this.selectedAnimal = (Animal)Cage2Animals.SelectedItem;
+            this.selectedCage = Zoo.CageIds.Cage2;
+        }
+
+        /// <summary>
+        /// Selec cage 3 animal
+        /// </summary>
+        /// <param name="sender">Caster over to the buttom</param>
+        /// <param name="e">Registered changes in event</param>
+        private void Cage3Animals_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Cage1Animals.SelectedIndex = -1;
+            Cage2Animals.SelectedIndex = -1;
+            this.selectedAnimal = (Animal)Cage3Animals.SelectedItem;
+            this.selectedCage = Zoo.CageIds.Cage3;
+        }
+
+        #endregion
+
+        #region zookeeper
+        /// <summary>
+        /// Adding/hiring a new zookeeper
+        /// </summary>
+        /// <param name="sender">Caster over to the buttom</param>
+        /// <param name="e">Registered changes in event</param>
+        private void AddZookeeperButton_Click(object sender, RoutedEventArgs e)
+        {
+            zoo.AddZookeeper();
+        }
+
+        /// <summary>
+        /// Selecting a zookeeper
+        /// </summary>
+        /// <param name="sender">Caster over to the buttom</param>
+        /// <param name="e">Registered changes in event</param>
+        private void Zookeepers_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            this.selectedZookeeper = (Zookeeper)Zookeepers.SelectedItem;
+        }
+
+        /// <summary>
+        /// Remove/fyre a zookeeper
+        /// </summary>
+        /// <param name="sender">Caster over to the buttom</param>
+        /// <param name="e">Registered changes in event</param>
+        private void RemoveZookeeperButton_Click(object sender, RoutedEventArgs e)
+        {
+            if ( selectedZookeeper == null)
+            {
+                this.SetTextBlockOutput("You need to choose a zookeeper.");
+                return;
+            }
+            zoo.RemoveZookeeper(selectedZookeeper);
+        }
+        #endregion
+
         #endregion
     }
 }
